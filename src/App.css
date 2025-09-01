@@ -1,0 +1,96 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+/* Responsive wrapper maintaining rectangle aspect ratio */
+.window-container {
+  width: 100%;
+  max-width: 700px;
+  aspect-ratio: 4 / 3; /* Keep old Windows rectangle feel */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.window {
+  width: 100%;
+  height: 100%;
+  background: #c0c0c0;
+  border: 2px solid black;
+  box-shadow: 4px 4px #808080, -2px -2px white;
+  display: flex;
+  flex-direction: column;
+  font-family: "MS Sans Serif", sans-serif;
+}
+
+/* Title bar */
+.title-bar {
+  background: linear-gradient(to right, navy, #1084d0);
+  color: white;
+  padding: 0.3rem 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.title-bar .buttons {
+  display: flex;
+  gap: 2px;
+}
+
+.title-bar .btn {
+  background: #c0c0c0;
+  border: 2px solid black;
+  width: 20px;
+  height: 20px;
+  font-size: 0.8rem;
+  line-height: 0.8rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Menu bar */
+.menu-bar {
+  background: #dcdcdc;
+  display: flex;
+  gap: 1rem;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.85rem;
+}
+
+/* Editor area */
+.editor {
+  flex: 1;
+  resize: none;
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+  background: white;
+  font-family: "Courier New", monospace;
+  font-size: 1rem;
+}
+
+/* Status bar */
+.status-bar {
+  background: #dcdcdc;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.8rem;
+  border-top: 2px solid #808080;
+}
+
+/* Download button */
+.download-btn {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: navy;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 2px 2px #808080, -1px -1px white;
+}
