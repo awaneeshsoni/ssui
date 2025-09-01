@@ -1,9 +1,8 @@
-// Email.jsx
 import React from "react";
 
 export default function Email() {
   return (
-    <div className="flex flex-col h-80">
+    <div className="flex flex-col w-full h-full">
       <div className="bg-blue-800 text-white px-2 py-1 flex justify-between items-center text-xs font-bold">
         <span>New Message</span>
         <div className="flex gap-2">

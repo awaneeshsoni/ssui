@@ -1,4 +1,3 @@
-// App.jsx
 import React, { useState } from "react";
 import Notepad from "./components/Notepad";
 import Email from "./components/ComposeEmail";
@@ -22,16 +21,16 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#008080] flex flex-col items-center justify-center text-sm font-sans">
-      {/* Home Page */}
+
       {page === "home" && (
         <div className="flex text-center flex-col items-center gap-8 px-4 w-full">
           <h1 className="text-3xl text-white font-bold mb-4 text-center">
             Retro Windows UI Custom Screenshots
           </h1>
 
-          {/* Demo Cards */}
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl">
-            {/* Email Demo */}
+
             <div
               onClick={() => setPage("email")}
               className="cursor-pointer bg-gray-200 border border-gray-400 shadow-[inset_-2px_-2px_#fff,inset_2px_2px_#000] p-3 hover:scale-[1.02] transition flex flex-col items-center"
@@ -48,7 +47,7 @@ export default function App() {
               </button>
             </div>
 
-            {/* Notepad Demo */}
+
             <div
               onClick={() => setPage("notepad")}
               className="cursor-pointer bg-gray-200 border border-gray-400 shadow-[inset_-2px_-2px_#fff,inset_2px_2px_#000] p-3 hover:scale-[1.02] transition flex flex-col items-center"
@@ -69,32 +68,42 @@ export default function App() {
       )}
 
       {/* Editor Pages */}
-      {page !== "home" && (
-        <div className="flex flex-col items-center gap-4 w-full px-4">
-          <div
-            id="screenshot-area"
-            className="bg-gray-300 border-2 border-gray-600 w-[95%] max-w-3xl"
-          >
-            {page === "notepad" && <Notepad />}
-            {page === "email" && <Email />}
-          </div>
+     {page !== "home" && (
+  <div className="flex flex-col items-center gap-4 w-full px-4">
+    <div
+      id="screenshot-area"
+      className="aspect-[4/3] resize both overflow-hidden border-2 border-gray-600 bg-gray-300"
+      style={{
+        minWidth: "300px",   // 👈 minimum width when it opens
+        maxWidth: "800px",   // optional maximum width
+      }}
+    >
+      <div className="w-full h-full">
+        {page === "notepad" && <Notepad className="w-full h-full" />}
+        {page === "email" && <Email className="w-full h-full" />}
+      </div>
+    </div>
 
-          <div className="flex gap-3 flex-wrap justify-center">
-            <button
-              onClick={() => setPage("home")}
-              className="px-3 py-1 bg-gray-200 border border-gray-400 shadow-[inset_-2px_-2px_#fff,inset_2px_2px_#000]"
-            >
-              ⬅ Back
-            </button>
-            <button
-              onClick={handleDownload}
-              className="px-3 py-1 bg-gray-200 border border-gray-400 shadow-[inset_-2px_-2px_#fff,inset_2px_2px_#000]"
-            >
-              💾 Download Screenshot
-            </button>
-          </div>
-        </div>
-      )}
+    <div className="flex gap-3 flex-wrap justify-center">
+      <button
+        onClick={() => setPage("home")}
+        className="px-3 py-1 bg-gray-200 border border-gray-400 shadow-[inset_-2px_-2px_#fff,inset_2px_2px_#000]"
+      >
+        ⬅ Back
+      </button>
+      <button
+        onClick={handleDownload}
+        className="px-3 py-1 bg-gray-200 border border-gray-400 shadow-[inset_-2px_-2px_#fff,inset_2px_2px_#000]"
+      >
+        💾 Download Screenshot
+      </button>
+    </div>
+  </div>
+)}
+
+
+
+
     </div>
   );
 }

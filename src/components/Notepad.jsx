@@ -1,9 +1,9 @@
-// Notepad.jsx
+
 import React from "react";
 
 export default function Notepad() {
   return (
-    <div className="flex flex-col h-80">
+    <div className="w-full h-full flex flex-col ">
       <div className="bg-blue-800 text-white px-2 py-1 flex justify-between items-center text-xs font-bold">
         <span>Untitled - Notepad</span>
         <div className="flex gap-2">
