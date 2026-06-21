@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Notepad from "./components/Notepad";
 import Email from "./components/ComposeEmail";
+import TwitterPost from "./components/ProfileCard";
 import { toPng } from "html-to-image";
 import demoemail from "./assets/demo-email.png";
 import demonote from "./assets/demo-notepad.png";
@@ -28,7 +29,6 @@ export default function App() {
             Retro Windows UI Custom Screenshots
           </h1>
 
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl">
 
             <div
@@ -36,73 +36,103 @@ export default function App() {
               className="cursor-pointer bg-gray-200 border border-gray-400 shadow-[inset_-2px_-2px_#fff,inset_2px_2px_#000] p-3 hover:scale-[1.02] transition flex flex-col items-center"
             >
               <div className="w-full max-h-[300px] flex items-center justify-center overflow-hidden border border-gray-500 mb-2 bg-white">
-                <img
-                  src={demoemail}
-                  alt="Windows 98 Email Demo"
-                  className="max-h-full w-auto object-contain"
-                />
+                <img src={demoemail} alt="Windows 98 Email Demo" className="max-h-full w-auto object-contain" />
               </div>
               <button className="px-4 py-1 bg-gray-300 border border-gray-600 shadow-[inset_-1px_-1px_#fff,inset_1px_1px_#000]">
                 ✉️ Open Email
               </button>
             </div>
 
-
             <div
               onClick={() => setPage("notepad")}
               className="cursor-pointer bg-gray-200 border border-gray-400 shadow-[inset_-2px_-2px_#fff,inset_2px_2px_#000] p-3 hover:scale-[1.02] transition flex flex-col items-center"
             >
               <div className="w-full max-h-[300px] flex items-center justify-center overflow-hidden border border-gray-500 mb-2 bg-white">
-                <img
-                  src={demonote}
-                  alt="Windows 95 Notepad Demo"
-                  className="max-h-full w-auto object-contain"
-                />
+                <img src={demonote} alt="Windows 95 Notepad Demo" className="max-h-full w-auto object-contain" />
               </div>
               <button className="px-4 py-1 bg-gray-300 border border-gray-600 shadow-[inset_-1px_-1px_#fff,inset_1px_1px_#000]">
                 📄 Open Notepad
               </button>
             </div>
+
+            <div
+              onClick={() => setPage("x.com")}
+              className="cursor-pointer bg-gray-200 border border-gray-400 shadow-[inset_-2px_-2px_#fff,inset_2px_2px_#000] p-3 hover:scale-[1.02] transition flex flex-col items-center"
+            >
+              <div className="w-full max-h-[300px] flex items-center justify-center overflow-hidden border border-gray-500 mb-2 bg-black">
+                <svg viewBox="0 0 24 24" width="60" height="60" fill="white">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.26 5.632 5.905-5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </div>
+              <button className="px-4 py-1 bg-gray-300 border border-gray-600 shadow-[inset_-1px_-1px_#fff,inset_1px_1px_#000]">
+                𝕏 Open X
+              </button>
+            </div>
+
           </div>
         </div>
       )}
 
-      {/* Editor Pages */}
-     {page !== "home" && (
-  <div className="flex flex-col items-center gap-4 w-full px-4">
-    <div
-      id="screenshot-area"
-      className="aspect-[4/3] resize both overflow-hidden border-2 border-gray-600 bg-gray-300"
-      style={{
-        minWidth: "300px",   // 👈 minimum width when it opens
-        maxWidth: "800px",   // optional maximum width
-      }}
-    >
-      <div className="w-full h-full">
-        {page === "notepad" && <Notepad className="w-full h-full" />}
-        {page === "email" && <Email className="w-full h-full" />}
-      </div>
-    </div>
+      {/* Notepad / Email pages — Windows chrome + resizable */}
+      {(page === "notepad" || page === "email") && (
+        <div className="flex flex-col items-center gap-4 w-full px-4">
+          <div
+            id="screenshot-area"
+            className="aspect-[4/3] resize overflow-hidden border-2 border-gray-600 bg-gray-300"
+            style={{ minWidth: "300px", maxWidth: "800px" }}
+          >
+            <div className="w-full h-full">
+              {page === "notepad" && <Notepad className="w-full h-full" />}
+              {page === "email" && <Email className="w-full h-full" />}
+            </div>
+          </div>
 
-    <div className="flex gap-3 flex-wrap justify-center">
-      <button
-        onClick={() => setPage("home")}
-        className="px-3 py-1 bg-gray-200 border border-gray-400 shadow-[inset_-2px_-2px_#fff,inset_2px_2px_#000]"
-      >
-        ⬅ Back
-      </button>
-      <button
-        onClick={handleDownload}
-        className="px-3 py-1 bg-gray-200 border border-gray-400 shadow-[inset_-2px_-2px_#fff,inset_2px_2px_#000]"
-      >
-        💾 Download Screenshot
-      </button>
-    </div>
-  </div>
-)}
+          <div className="flex gap-3 flex-wrap justify-center">
+            <button
+              onClick={() => setPage("home")}
+              className="px-3 py-1 bg-gray-200 border border-gray-400 shadow-[inset_-2px_-2px_#fff,inset_2px_2px_#000]"
+            >
+              ⬅ Back
+            </button>
+            <button
+              onClick={handleDownload}
+              className="px-3 py-1 bg-gray-200 border border-gray-400 shadow-[inset_-2px_-2px_#fff,inset_2px_2px_#000]"
+            >
+              💾 Download Screenshot
+            </button>
+          </div>
+        </div>
+      )}
 
+      {/* X.com page — clean Twitter screenshot, no Windows chrome */}
+      {page === "x.com" && (
+        <div className="flex flex-col items-center gap-4 w-full px-4">
+          <div
+            id="screenshot-area"
+            className="aspect-[4/3] resize overflow-hidden border-2 border-gray-600 bg-gray-300"
+            style={{ minWidth: "300px", maxWidth: "800px" }}
+          >
+            <div className="w-full h-full">
+            <TwitterPost />
+            </div>
+          </div>
 
-
+          <div className="flex gap-3 flex-wrap justify-center">
+            <button
+              onClick={() => setPage("home")}
+              className="px-3 py-1 bg-gray-200 border border-gray-400 shadow-[inset_-2px_-2px_#fff,inset_2px_2px_#000]"
+            >
+              ⬅ Back
+            </button>
+            <button
+              onClick={handleDownload}
+              className="px-3 py-1 bg-gray-200 border border-gray-400 shadow-[inset_-2px_-2px_#fff,inset_2px_2px_#000]"
+            >
+              💾 Download Screenshot
+            </button>
+          </div>
+        </div>
+      )}
 
     </div>
   );
