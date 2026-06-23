@@ -310,7 +310,9 @@ export default function App() {
               width: containerWidth, 
               height: containerHeight,
               minWidth: "240px",
-              maxWidth: "100%"
+              maxWidth: "100%",
+              maxHeight: "calc(100vw * 0.75)",
+              minHeight: "225px"
             }}
           >
             <div className="w-full h-full">

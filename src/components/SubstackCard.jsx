@@ -5,8 +5,8 @@ export default function SubstackCard() {
   const [quote, setQuote] = useState("write");
 
   return (
-    <div className="w-full h-full bg-gradient-to-br from-orange-500 via-orange-400 to-orange-600 p-12">
-      <div className="w-full h-full rounded-md bg-white shadow-[0_30px_70px_rgba(0,0,0,0.18)] border border-white/80 overflow-hidden flex flex-col">
+    <div className="w-full h-full bg-gradient-to-br from-orange-500 via-orange-400 to-orange-600 p-6 md:p-12">
+      <div className="w-full h-full rounded-md bg-white shadow-[0_30px_70px_rgba(0,0,0,0.18)] border border-white/80 overflow-hidden flex flex-col transform scale-95 sm:scale-100">
         <div className="flex items-center justify-between px-3 py-4 ">
           <div className="flex items-center gap-2">
             <img
@@ -43,9 +43,9 @@ export default function SubstackCard() {
             />
           </div>
 
-          <div className="flex items-center justify-between text-xs text-slate-400 uppercase tracking-[0.05em] font-medium pb-3 pt-2">
-            <span>Jan 10, 2025</span>
-            <span>substack.com/@awaneeshsoni</span>
+          <div className="flex items-center justify-between flex-nowrap gap-2 text-xs text-slate-400 uppercase tracking-[0.05em] font-medium pb-3 pt-2">
+            <span className="whitespace-nowrap">Jan 10, 2025</span>
+            <span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-full">substack.com/@awaneeshsoni</span>
           </div>
         </div>
       </div>
