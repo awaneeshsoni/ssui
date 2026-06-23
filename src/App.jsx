@@ -9,6 +9,9 @@ import demonote from "./assets/demo-notepad.png";
 
 export default function App() {
   const [page, setPage] = useState("home");
+  const [isResizing, setIsResizing] = useState(false);
+  const [containerWidth, setContainerWidth] = useState(500);
+  const [containerHeight, setContainerHeight] = useState(375);
 
   const handleDownload = () => {
     const node = document.getElementById("screenshot-area");
@@ -20,6 +23,44 @@ export default function App() {
       link.click();
     });
   };
+
+  const handleResizeStart = (e) => {
+    setIsResizing(true);
+    e.preventDefault();
+  };
+
+  React.useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (!isResizing) return;
+      const container = document.getElementById("screenshot-area");
+      if (!container) return;
+      
+      const rect = container.getBoundingClientRect();
+      const newWidth = Math.max(300, e.clientX - rect.left);
+      const newHeight = Math.max(225, e.clientY - rect.top);
+      
+      setContainerWidth(newWidth);
+      setContainerHeight(newHeight);
+    };
+
+    const handleMouseUp = () => {
+      setIsResizing(false);
+    };
+
+    if (isResizing) {
+      window.addEventListener("mousemove", handleMouseMove);
+      window.addEventListener("mouseup", handleMouseUp);
+      window.addEventListener("touchmove", handleMouseMove);
+      window.addEventListener("touchend", handleMouseUp);
+    }
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("touchmove", handleMouseMove);
+      window.removeEventListener("touchend", handleMouseUp);
+    };
+  }, [isResizing]);
 
   return (
     <div className="min-h-screen bg-[#008080] flex flex-col items-center justify-center text-sm font-sans">
@@ -87,17 +128,77 @@ export default function App() {
       )}
 
       {/* Notepad / Email pages — Windows chrome + resizable */}
-      {(page === "notepad" || page === "email") && (
+      {page === "email" && (
         <div className="flex flex-col items-center gap-4 w-full px-4">
           <div
             id="screenshot-area"
-            className="aspect-[4/3] resize overflow-hidden border-2 border-gray-600 bg-gray-300"
-            style={{ minWidth: "300px", maxWidth: "800px" }}
+            className="relative overflow-hidden border-2 border-gray-600 bg-gray-300"
+            style={{ 
+              width: containerWidth, 
+              height: containerHeight,
+              minWidth: "300px",
+              maxWidth: "800px"
+            }}
+          >
+            <div className="w-full h-full">
+              {page === "email" && <Email className="w-full h-full" />}
+            </div>
+            
+            {/* Invisible Resize Handle */}
+            <div
+              onMouseDown={handleResizeStart}
+              onTouchStart={handleResizeStart}
+              className="absolute bottom-0 right-0 w-12 h-12 -mb-6 -mr-6 cursor-nwse-resize select-none"
+              style={{
+                userSelect: 'none',
+                touchAction: 'none'
+              }}
+            />
+          </div>
+
+          <div className="flex gap-3 flex-wrap justify-center">
+            <button
+              onClick={() => setPage("home")}
+              className="px-3 py-1 bg-gray-200 border border-gray-400 shadow-[inset_-2px_-2px_#fff,inset_2px_2px_#000]"
+            >
+              ⬅ Back
+            </button>
+            <button
+              onClick={handleDownload}
+              className="px-3 py-1 bg-gray-200 border border-gray-400 shadow-[inset_-2px_-2px_#fff,inset_2px_2px_#000]"
+            >
+              💾 Download Screenshot
+            </button>
+          </div>
+        </div>
+      )}
+
+      {(page === "notepad") && (
+        <div className="flex flex-col items-center gap-4 w-full px-4">
+          <div
+            id="screenshot-area"
+            className="relative overflow-hidden border-2 border-gray-600 bg-gray-300"
+            style={{ 
+              width: containerWidth, 
+              height: containerHeight,
+              minWidth: "300px",
+              maxWidth: "800px"
+            }}
           >
             <div className="w-full h-full">
               {page === "notepad" && <Notepad className="w-full h-full" />}
-              {page === "email" && <Email className="w-full h-full" />}
             </div>
+            
+            {/* Invisible Resize Handle */}
+            <div
+              onMouseDown={handleResizeStart}
+              onTouchStart={handleResizeStart}
+              className="absolute bottom-0 right-0 w-12 h-12 -mb-6 -mr-6 cursor-nwse-resize select-none"
+              style={{
+                userSelect: 'none',
+                touchAction: 'none'
+              }}
+            />
           </div>
 
           <div className="flex gap-3 flex-wrap justify-center">
@@ -122,12 +223,28 @@ export default function App() {
         <div className="flex flex-col items-center gap-4 w-full px-4">
           <div
             id="screenshot-area"
-            className="aspect-[4/3] resize overflow-hidden border-2 border-gray-600 bg-gray-300"
-            style={{ minWidth: "300px", maxWidth: "800px" }}
+            className="relative overflow-hidden border-2 border-gray-600 bg-gray-300"
+            style={{ 
+              width: containerWidth, 
+              height: containerHeight,
+              minWidth: "300px",
+              maxWidth: "800px"
+            }}
           >
             <div className="w-full h-full">
             <TwitterPost />
             </div>
+            
+            {/* Invisible Resize Handle */}
+            <div
+              onMouseDown={handleResizeStart}
+              onTouchStart={handleResizeStart}
+              className="absolute bottom-0 right-0 w-12 h-12 -mb-6 -mr-6 cursor-nwse-resize select-none"
+              style={{
+                userSelect: 'none',
+                touchAction: 'none'
+              }}
+            />
           </div>
 
           <div className="flex gap-3 flex-wrap justify-center">
@@ -151,12 +268,28 @@ export default function App() {
         <div className="flex flex-col items-center gap-4 w-full px-4">
           <div
             id="screenshot-area"
-            className="aspect-[4/3] resize overflow-hidden border-2 border-gray-600 bg-gray-300"
-            style={{ minWidth: "300px", maxWidth: "800px" }}
+            className="relative overflow-hidden border-2 border-gray-600 bg-gray-300"
+            style={{ 
+              width: containerWidth, 
+              height: containerHeight,
+              minWidth: "500px",
+              maxWidth: "800px"
+            }}
           >
             <div className="w-full h-full">
               <SubstackCard />
             </div>
+            
+            {/* Invisible Resize Handle */}
+            <div
+              onMouseDown={handleResizeStart}
+              onTouchStart={handleResizeStart}
+              className="absolute bottom-0 right-0 w-12 h-12 -mb-6 -mr-6 cursor-nwse-resize select-none"
+              style={{
+                userSelect: 'none',
+                touchAction: 'none'
+              }}
+            />
           </div>
 
           <div className="flex gap-3 flex-wrap justify-center">

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import profileImg from "../assets/profile.jpeg";
 
 export default function SubstackCard() {
-  const [quote, setQuote] = useState("Don't seek advice, seek solutions");
+  const [quote, setQuote] = useState("write");
 
   return (
     <div className="w-full h-full bg-gradient-to-br from-orange-500 via-orange-400 to-orange-600 p-12">
