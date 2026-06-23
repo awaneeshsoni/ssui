@@ -136,8 +136,8 @@ export default function App() {
             style={{ 
               width: containerWidth, 
               height: containerHeight,
-              minWidth: "300px",
-              maxWidth: "800px"
+              minWidth: "240px",
+              maxWidth: "100%"
             }}
           >
             <div className="w-full h-full">
@@ -148,7 +148,7 @@ export default function App() {
             <div
               onMouseDown={handleResizeStart}
               onTouchStart={handleResizeStart}
-              className="absolute bottom-0 right-0 w-12 h-12 -mb-6 -mr-6 cursor-nwse-resize select-none"
+              className="absolute bottom-0 right-0 w-12 h-12 cursor-nwse-resize select-none"
               style={{
                 userSelect: 'none',
                 touchAction: 'none'
@@ -181,8 +181,8 @@ export default function App() {
             style={{ 
               width: containerWidth, 
               height: containerHeight,
-              minWidth: "300px",
-              maxWidth: "800px"
+              minWidth: "240px",
+              maxWidth: "100%"
             }}
           >
             <div className="w-full h-full">
@@ -193,7 +193,7 @@ export default function App() {
             <div
               onMouseDown={handleResizeStart}
               onTouchStart={handleResizeStart}
-              className="absolute bottom-0 right-0 w-12 h-12 -mb-6 -mr-6 cursor-nwse-resize select-none"
+              className="absolute bottom-0 right-0 w-12 h-12 cursor-nwse-resize select-none"
               style={{
                 userSelect: 'none',
                 touchAction: 'none'
@@ -227,8 +227,8 @@ export default function App() {
             style={{ 
               width: containerWidth, 
               height: containerHeight,
-              minWidth: "300px",
-              maxWidth: "800px"
+              minWidth: "240px",
+              maxWidth: "100%"
             }}
           >
             <div className="w-full h-full">
@@ -239,7 +239,7 @@ export default function App() {
             <div
               onMouseDown={handleResizeStart}
               onTouchStart={handleResizeStart}
-              className="absolute bottom-0 right-0 w-12 h-12 -mb-6 -mr-6 cursor-nwse-resize select-none"
+              className="absolute bottom-0 right-0 w-12 h-12 cursor-nwse-resize select-none"
               style={{
                 userSelect: 'none',
                 touchAction: 'none'
@@ -272,8 +272,8 @@ export default function App() {
             style={{ 
               width: containerWidth, 
               height: containerHeight,
-              minWidth: "500px",
-              maxWidth: "800px"
+              minWidth: "240px",
+              maxWidth: "100%"
             }}
           >
             <div className="w-full h-full">
@@ -284,7 +284,7 @@ export default function App() {
             <div
               onMouseDown={handleResizeStart}
               onTouchStart={handleResizeStart}
-              className="absolute bottom-0 right-0 w-12 h-12 -mb-6 -mr-6 cursor-nwse-resize select-none"
+              className="absolute bottom-0 right-0 w-12 h-12 cursor-nwse-resize select-none"
               style={{
                 userSelect: 'none',
                 touchAction: 'none'
