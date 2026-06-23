@@ -27,10 +27,13 @@ export default function App() {
   const handleResizeStart = (e) => {
     setIsResizing(true);
     e.preventDefault();
+    if (e.pointerId && e.currentTarget && e.currentTarget.setPointerCapture) {
+      e.currentTarget.setPointerCapture(e.pointerId);
+    }
   };
 
   React.useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handlePointerMove = (e) => {
       if (!isResizing) return;
       const container = document.getElementById("screenshot-area");
       if (!container) return;
@@ -43,24 +46,55 @@ export default function App() {
       setContainerHeight(newHeight);
     };
 
-    const handleMouseUp = () => {
+    const handlePointerUp = () => {
       setIsResizing(false);
     };
 
     if (isResizing) {
-      window.addEventListener("mousemove", handleMouseMove);
-      window.addEventListener("mouseup", handleMouseUp);
-      window.addEventListener("touchmove", handleMouseMove);
-      window.addEventListener("touchend", handleMouseUp);
+      window.addEventListener("pointermove", handlePointerMove);
+      window.addEventListener("pointerup", handlePointerUp);
+      window.addEventListener("pointercancel", handlePointerUp);
     }
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
-      window.removeEventListener("touchmove", handleMouseMove);
-      window.removeEventListener("touchend", handleMouseUp);
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerup", handlePointerUp);
+      window.removeEventListener("pointercancel", handlePointerUp);
     };
   }, [isResizing]);
+
+  const renderResizeControls = () => (
+    <div className="flex flex-col gap-4 w-full max-w-3xl px-2">
+      <div className="flex flex-col gap-2">
+        <label className="flex justify-between text-xs text-white/80">
+          <span>Width</span>
+          <span>{containerWidth}px</span>
+        </label>
+        <input
+          type="range"
+          min="240"
+          max="1000"
+          value={containerWidth}
+          onChange={(e) => setContainerWidth(Number(e.target.value))}
+          className="w-full accent-cyan-300"
+        />
+      </div>
+      <div className="flex flex-col gap-2">
+        <label className="flex justify-between text-xs text-white/80">
+          <span>Height</span>
+          <span>{containerHeight}px</span>
+        </label>
+        <input
+          type="range"
+          min="225"
+          max="800"
+          value={containerHeight}
+          onChange={(e) => setContainerHeight(Number(e.target.value))}
+          className="w-full accent-cyan-300"
+        />
+      </div>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-[#008080] flex flex-col items-center justify-center text-sm font-sans">
@@ -146,15 +180,16 @@ export default function App() {
             
             {/* Invisible Resize Handle */}
             <div
-              onMouseDown={handleResizeStart}
-              onTouchStart={handleResizeStart}
-              className="absolute bottom-0 right-0 w-12 h-12 cursor-nwse-resize select-none"
+              onPointerDown={handleResizeStart}
+              className="absolute bottom-0 right-0 w-16 h-16 sm:w-12 sm:h-12 cursor-nwse-resize select-none"
               style={{
                 userSelect: 'none',
                 touchAction: 'none'
               }}
             />
           </div>
+
+          {renderResizeControls()}
 
           <div className="flex gap-3 flex-wrap justify-center">
             <button
@@ -191,15 +226,16 @@ export default function App() {
             
             {/* Invisible Resize Handle */}
             <div
-              onMouseDown={handleResizeStart}
-              onTouchStart={handleResizeStart}
-              className="absolute bottom-0 right-0 w-12 h-12 cursor-nwse-resize select-none"
+              onPointerDown={handleResizeStart}
+              className="absolute bottom-0 right-0 w-16 h-16 sm:w-12 sm:h-12 cursor-nwse-resize select-none"
               style={{
                 userSelect: 'none',
                 touchAction: 'none'
               }}
             />
           </div>
+
+          {renderResizeControls()}
 
           <div className="flex gap-3 flex-wrap justify-center">
             <button
@@ -237,15 +273,16 @@ export default function App() {
             
             {/* Invisible Resize Handle */}
             <div
-              onMouseDown={handleResizeStart}
-              onTouchStart={handleResizeStart}
-              className="absolute bottom-0 right-0 w-12 h-12 cursor-nwse-resize select-none"
+              onPointerDown={handleResizeStart}
+              className="absolute bottom-0 right-0 w-16 h-16 sm:w-12 sm:h-12 cursor-nwse-resize select-none"
               style={{
                 userSelect: 'none',
                 touchAction: 'none'
               }}
             />
           </div>
+
+          {renderResizeControls()}
 
           <div className="flex gap-3 flex-wrap justify-center">
             <button
@@ -282,15 +319,16 @@ export default function App() {
             
             {/* Invisible Resize Handle */}
             <div
-              onMouseDown={handleResizeStart}
-              onTouchStart={handleResizeStart}
-              className="absolute bottom-0 right-0 w-12 h-12 cursor-nwse-resize select-none"
+              onPointerDown={handleResizeStart}
+              className="absolute bottom-0 right-0 w-16 h-16 sm:w-12 sm:h-12 cursor-nwse-resize select-none"
               style={{
                 userSelect: 'none',
                 touchAction: 'none'
               }}
             />
           </div>
+
+          {renderResizeControls()}
 
           <div className="flex gap-3 flex-wrap justify-center">
             <button
