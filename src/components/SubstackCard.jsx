@@ -21,7 +21,7 @@ export default function SubstackCard() {
             />
             <div>
               <div className="text-base font-medium text-slate-900 my-[-2px]">Awaneesh Soni</div>
-              <div className="text-[13px] text-slate-500">insights</div>
+              <div className="text-[13px] text-slate-500">substack.com/@awaneeshsoni</div>
             </div>
           </div>
           <svg className="w-6 h-6 text-orange-500" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -45,7 +45,6 @@ export default function SubstackCard() {
 
           <div className="flex items-center justify-between flex-nowrap gap-2 text-xs text-slate-400 uppercase tracking-[0.05em] font-medium pb-3 pt-2">
             <span className="whitespace-nowrap">Jan 10, 2025</span>
-            <span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-full">substack.com/@awaneeshsoni</span>
           </div>
         </div>
       </div>
